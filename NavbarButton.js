@@ -7,9 +7,13 @@ import {
 
 import styles from './styles';
 
-const renderButtonText(data, props) {
+const renderButtonText = (data, props) => {
+  if (typeof data === 'function') {
+    return <View style={props.style}>{data()}</View>;
+  }
+
   if (!data || data.props) {
-    return data; 
+    return <View style={props.style}>{data}</View>; 
   }
   
   return (
