@@ -7,10 +7,22 @@ import {
 
 import styles from './styles';
 
+const renderButtonText(data, props) {
+  if (!data || data.props) {
+    return data; 
+  }
+  
+  return (
+    <View style={props.style}>
+      <Text style={[styles.navBarButtonText, props.textStyle]}>{props.title}</Text>
+    </View>
+  )
+}
+
 export default function NavbarButton(props) {
   const {
     style,
-    tintColor,
+    textStyle,
     title,
     handler,
     disabled,
@@ -26,9 +38,7 @@ export default function NavbarButton(props) {
       accessible={accessible}
       accessibilityLabel={accessibilityLabel}
     >
-      <View style={style}>
-        <Text style={[styles.navBarButtonText, { color: tintColor }]}>{title}</Text>
-      </View>
+      {renderButtonText(title, props)}
     </TouchableOpacity>
   );
 }
